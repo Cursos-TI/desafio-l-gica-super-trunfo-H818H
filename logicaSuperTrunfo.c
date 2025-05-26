@@ -7,7 +7,8 @@
 
 
 
-int main() {
+int main() 
+{
     // Definição das variáveis para armazenar as propriedades das cidades
     // Você pode utilizar o código do primeiro desafio
 
