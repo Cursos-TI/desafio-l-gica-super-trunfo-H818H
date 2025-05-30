@@ -9,6 +9,7 @@
 #define MAX_CODE 10
 #define MAX_CARTAS 2
 
+// Struct para armazenar os atributos de cada carta
 typedef struct 
 {
     char estado[MAX_STR];
@@ -24,6 +25,7 @@ typedef struct
     float pib_reais;
 } CARTAS;
 
+// Uso de enum TIPOS para auxiliar na função _input(), que precisa receber um tipo para retornar um valor valido
 typedef enum 
 {
     T_INT,
@@ -31,6 +33,7 @@ typedef enum
     T_FLOAT
 } TIPOS;
 
+// Uso de enum ATRIBUTOS para auxiliar no momento de escolher um atributo
 typedef enum 
 {
     INVALIDO,
@@ -41,6 +44,7 @@ typedef enum
     DENSIDADEDEMOGRAFICA,
 } ATRIBUTOS;
 
+// Função para identificar qual atributo foi escolhido a partir de uma string
 ATRIBUTOS definirAtributo(char *e) 
 {
     if(strcmp(e, "populacao") == 0) return POPULACAO;
@@ -51,6 +55,8 @@ ATRIBUTOS definirAtributo(char *e)
     else return INVALIDO;
 }
 
+// Função que peguei de outro programa que havia feito e alterei alguns detalhes para funcionar melhor neste caso,
+// alem de melhorar no momento de inserir os dados das cartas e a visualização do codigo
 bool _input(char mensagem[MAX_STR], void *saida, TIPOS t) 
 {
     char buffer[MAX_STR];
@@ -112,6 +118,7 @@ bool _input(char mensagem[MAX_STR], void *saida, TIPOS t)
     return true;
 }
 
+// Funçao para exibir as cartas evitando uso de varios printf()
 void exibirCartas(CARTAS *carta) 
 {
     if(carta == NULL) 
@@ -138,6 +145,7 @@ void exibirCartas(CARTAS *carta)
     }
 }
 
+// Funçoes para calculos de Densidade Demografica, PIB Per Capita e Super Poder
 float calcDensidadeDemografica(int populacao, float area) 
 {
     return (area <= 0.0f) ? 0.0f : ((float)populacao / area);
@@ -162,6 +170,7 @@ float calcSuperPoder(int pontos_turisticos, int populacao, float area, float pib
     return termo_pontos + termo_pib + termo_pop + termo_area + termo_pib_capita + termo_densidade;
 }
 
+// Função separada para comparar as cartas e exibir o resultado. Poderia ter feito dentro da main(), mas assim fica mais organizado e ajuda a entender sobre funções
 void compararCartas(CARTAS *carta, ATRIBUTOS opcaoUm, ATRIBUTOS opcaoDois) 
 {
     if(carta == NULL || carta[0].cidade[0] == '\0' || carta[1].cidade[0] == '\0') 
@@ -312,7 +321,7 @@ int main()
     char atributoUm[MAX_STR], atributoDois[MAX_STR];
     ATRIBUTOS opcaoUm, opcaoDois;
 
-    // Cadastro das cartas
+    // Cadastro das cartas utilizando loop for()
     printf("\n***Cadastro de Cartas***\n");
     for(int i = 0; i < MAX_CARTAS; i++) 
     {
